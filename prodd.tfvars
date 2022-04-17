@@ -1,0 +1,7 @@
+vpc_cidr_var= "10.0.0.0/16"
+region= "eu-west-1"
+ami="ami-08ca3fed11864d6bb"
+pub_sub1_cidr_block_var="10.0.0.0/24"
+priv_sub1_cidr_block_var="10.0.1.0/24"
+pub_sub2_cidr_block_var="10.0.2.0/24"
+priv_sub2_cidr_block_var="10.0.3.0/24"
