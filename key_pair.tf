@@ -4,7 +4,7 @@ resource "tls_private_key" "private_key" {
 }
 
 resource "aws_key_pair" "public_key" {
-  key_name   = "key-pair-02"
+  key_name   = "key-pair"
   public_key = tls_private_key.private_key.public_key_openssh
 }
 
@@ -13,6 +13,6 @@ resource "local_file" "private_key" {
     tls_private_key.private_key,
   ]
   content  = tls_private_key.private_key.private_key_pem
-  filename = "key-pair-02.pem"
+  filename = "key-pair.pem"
 
 }
