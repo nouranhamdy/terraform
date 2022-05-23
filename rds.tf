@@ -62,3 +62,4 @@ resource "aws_db_instance" "rds-01" {
   skip_final_snapshot  = true
   multi_az             = false
 }
+
