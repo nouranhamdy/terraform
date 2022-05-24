@@ -1,6 +1,6 @@
 terraform {
 backend "s3" {
-bucket = "terraform-backend-bucket-n"
+bucket = "jenkins-nouran-bucket"
 key = "default/terraform.tfstate"
 region = "us-east-1"
 }

@@ -1,0 +1,23 @@
+pipeline {
+    agent any 
+    stages {
+        stage('terraform'){
+            steps{
+                withCredentials([
+                string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'),
+                string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')
+                ])
+
+                sh 'terraform init'
+                sh 'terraform apply --var-file dev.tfvars -auto-approve'
+            }
+        }
+        
+        stage('Ansible') {
+            steps {
+                sh 'ansible-playbook -i ./ansible-slave/inventory --private-key key-pair.pem ./ansible-slave/slave-playbook.yaml'
+            }
+        }
+    }
+
+}
