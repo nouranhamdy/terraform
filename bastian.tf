@@ -1,7 +1,7 @@
 resource "aws_instance" "bastian" {
   ami           = var.ami # us-west-2
   instance_type = "t2.micro"
-  key_name = "key-pair-02"
+  key_name = "key-pair"
   provisioner "local-exec" {
     command = "echo ${self.public_ip}"
   } 

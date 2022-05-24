@@ -1,7 +1,7 @@
 resource "aws_instance" "ec2" {
   ami           = var.ami # us-west-2
   instance_type = "t2.micro"
-  key_name = "key-pair-02"
+  key_name = "key-pair"
 
   network_interface {
     network_interface_id = aws_network_interface.nic-ec2.id
