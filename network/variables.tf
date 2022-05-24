@@ -21,3 +21,4 @@ variable priv_sub1_cidr_block_arg{
 variable priv_sub2_cidr_block_arg{
     type= string
 }
+

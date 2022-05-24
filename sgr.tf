@@ -51,3 +51,30 @@ resource "aws_security_group" "sgr-ssh-8000" {
   }
 }
 
+resource "aws_security_group" "DB-test" {
+  name        = "DB-SG"
+  description = "DB"
+  vpc_id      = module.network.vpc_id
+
+  ingress {
+    description      = "Allow all"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = [module.network.vpc_cidr_var]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = {
+    Name = "${var.region}-SG-DB"
+  }
+}
+

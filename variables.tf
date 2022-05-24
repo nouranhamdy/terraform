@@ -32,6 +32,7 @@ type  = string
 }
 
 variable db_User {
-  type        = string
+  type  = string
 
 }
+
