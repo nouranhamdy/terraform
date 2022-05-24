@@ -16,7 +16,7 @@ pipeline {
         
         stage('Ansible') {
             steps {
-                sh 'ansible-playbook -i ./ansible-slave/inventory --private-key key-pair.pem ./ansible-slave/slave-playbook.yaml'
+                sh 'ansible-playbook -i ansible-slave/inventory --private-key key-pair.pem ansible-slave/slave-playbook.yaml'
             }
         }
     }
