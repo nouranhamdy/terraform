@@ -25,3 +25,13 @@ variable priv_sub2_cidr_block_var{
 variable ami{
     type= string
 }
+
+variable db_Pass{
+type  = string
+
+}
+
+variable db_User {
+  type        = string
+
+}
