@@ -19,9 +19,10 @@ pipeline {
         stage('Ansible') {
             steps {
                 dir("${env.WORKSPACE}/scripts/"){
-                    sh 'source scripts/jumphost.sh'
+                    sh 'source jumphost.sh'
                 }
-                sh 'ansible-playbook -i ansible-slave/inventory --private-key terraform/key-pair.pem ansible-slave/slave-playbook.yaml'  
+                dir("${env.WORKSPACE}/ansible-slave/"){
+                    sh 'ansible-playbook -i inventory --private-key terraform/key-pair.pem slave-playbook.yaml'  
             }
         }
     }
