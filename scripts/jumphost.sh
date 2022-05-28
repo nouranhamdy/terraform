@@ -3,8 +3,9 @@ if [[ -f ~/.ssh/config ]]
 then
     rm ~/.ssh/config
 fi
-cat key-pair.pem > ~/.ssh/mykey.pem
+cat ${env.WORKSPACE}/terraform/key-pair.pem > ~/.ssh/mykey.pem
 chmod 400 ~/.ssh/mykey.pem
+cd ${env.WORKSPACE}/terraform/
 bastion_ip=`terraform output -json bastion-ip | tr -d '"'`
 private_ip=`terraform output -json private-ip | tr -d '"'`
 export private_ip
@@ -29,7 +30,7 @@ host private_instance
 EOF
 
 
-cat << EOF > ansible-slave/inventory
+cat << EOF > ${env.WORKSPACE}/ansible-slave/inventory
 [slaves]
 server-a ansible_host=${private_ip} ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/mykey.pem
 [slaves:vars]
