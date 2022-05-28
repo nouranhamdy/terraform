@@ -21,12 +21,6 @@ host bastion
    HostName ${bastion_ip}
    User ubuntu
    identityFile ~/.ssh/mykey.pem
-
-host private_instance
-   HostName  ${private_ip}
-   user  ubuntu
-   ProxyCommand ssh bastion -W %h:%p
-   identityFile ~/.ssh/mykey.pem
 EOF
 
 # cat << EOF > ansible-slave/inventory
