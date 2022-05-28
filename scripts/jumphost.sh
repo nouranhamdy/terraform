@@ -3,7 +3,9 @@ if [[ -f ~/.ssh/config ]]
 then
     rm ~/.ssh/config
 fi
-cat ${env.WORKSPACE}/terraform/key-pair.pem > ~/.ssh/mykey.pem
+echo ${env.WORKSPACE}
+cd /var/jenkins_home/workspace/test-terraform/
+cat terraform/key-pair.pem > ~/.ssh/mykey.pem
 chmod 400 ~/.ssh/mykey.pem
 cd ${env.WORKSPACE}/terraform/
 bastion_ip=`terraform output -json bastion-ip | tr -d '"'`
