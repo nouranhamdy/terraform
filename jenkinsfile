@@ -10,10 +10,9 @@ pipeline {
                 dir("${env.WORKSPACE}/terraform/"){
                     sh 'terraform init -reconfigure'
                     sh 'terraform apply -var-file dev.tfvars -auto-approve'
-                    sh '''
-                    bastion_ip=`terraform output -json bastion-ip | tr -d '"'`
-                    private_ip=`terraform output -json private-ip | tr -d '"'`
-                    '''
+                    dir("${env.WORKSPACE}/scripts/"){
+                        sh '. ./jumphost.sh'
+                    }
                 }
                 
                 }
@@ -22,9 +21,6 @@ pipeline {
         
         stage('Ansible') {
             steps {
-                dir("${env.WORKSPACE}/scripts/"){
-                    sh '. ./jumphost.sh'
-                }
                 dir("${env.WORKSPACE}/ansible-slave/"){
                     sh 'ansible-playbook -i inventory --private-key terraform/key-pair.pem slave-playbook.yaml'  
                 }
