@@ -1,4 +1,4 @@
-resource "aws_instance" "bastian" {
+resource "aws_instance" "bastion" {
   ami           = var.ami # us-west-2
   instance_type = "t2.micro"
   key_name = "key-pair"

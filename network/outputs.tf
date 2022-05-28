@@ -21,3 +21,4 @@ output "public-subnet-02-id" {
 output "vpc-cidr-block" {
   value =aws_vpc.vpc-01.cidr_block 
 }
+
