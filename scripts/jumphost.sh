@@ -1,5 +1,9 @@
 #!/bin/sh
 cd /var/jenkins_home/workspace/test-terraform/
+if [[ -f ~/.ssh/mykey.pem ]]
+then
+    rm ~/.ssh/mykey.pem
+fi
 cat terraform/key-pair.pem > ~/.ssh/mykey.pem
 chmod 400 ~/.ssh/mykey.pem
 #cd terraform/
