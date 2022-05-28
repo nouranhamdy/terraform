@@ -1,8 +1,4 @@
 #!/bin/sh
-if [[ -f ~/.ssh/config ]]
-then
-    rm ~/.ssh/config
-fi
 cd /var/jenkins_home/workspace/test-terraform/
 sudo cat terraform/key-pair.pem > ~/.ssh/mykey.pem
 chmod 400 ~/.ssh/mykey.pem
@@ -19,12 +15,12 @@ Host *
     ServerAliveCountMax 30
 
 host bastion
-   HostName ${bastion_ip}
+   HostName ${env.bastion_ip}
    User ubuntu
    identityFile ~/.ssh/mykey.pem
 
 host private_instance
-   HostName  ${private_ip}
+   HostName  ${env.private_ip}
    user  ubuntu
    ProxyCommand ssh bastion -W %h:%p
    identityFile ~/.ssh/mykey.pem
