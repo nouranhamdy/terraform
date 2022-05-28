@@ -17,7 +17,7 @@ pipeline {
         stage('Ansible') {
             steps {
                 dir("scripts"){
-                    sh 'source ./jumphost.sh'
+                    sh 'source jumphost.sh'
                 }
                 dir("ansible-slave"){
                     sh 'ansible-playbook -i inventory --private-key key-pair.pem slave-playbook.yaml'
