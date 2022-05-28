@@ -9,7 +9,6 @@ cd /var/jenkins_home/workspace/test-terraform/
 cd terraform/
 bastion_ip=`terraform output -json bastion-ip | tr -d '"'`
 private_ip=`terraform output -json private-ip | tr -d '"'`
-#export private_ip
 cat << EOF > ~/.ssh/config
 Host *
     Port 22
@@ -30,7 +29,7 @@ host private_instance
    identityFile ~/.ssh/mykey.pem
 EOF
 
-
+rm ansible-slave/inventory
 cat << EOF > ansible-slave/inventory
 [slaves]
 server-a ansible_host=${private_ip} ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/mykey.pem
