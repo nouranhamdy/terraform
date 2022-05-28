@@ -29,7 +29,6 @@ host private_instance
    identityFile ~/.ssh/mykey.pem
 EOF
 
-rm ansible-slave/inventory
 cat << EOF > ansible-slave/inventory
 [slaves]
 server-a ansible_host=${private_ip} ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/mykey.pem
