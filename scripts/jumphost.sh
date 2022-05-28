@@ -29,9 +29,9 @@ host private_instance
    identityFile ~/.ssh/mykey.pem
 EOF
 
-cat << EOF > ansible-slave/inventory
-[slaves]
-server-a ansible_host=${private_ip} ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/mykey.pem
-[slaves:vars]
-ansible_ssh_common_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand="ssh -W %h:%p -q bastion"'
-EOF
+# cat << EOF > ansible-slave/inventory
+# [slaves]
+# server-a ansible_host=${private_ip} ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/mykey.pem
+# [slaves:vars]
+# ansible_ssh_common_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand="ssh -W %h:%p -q bastion"'
+# EOF
