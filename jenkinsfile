@@ -8,8 +8,12 @@ pipeline {
                 string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')
                 ]){
                 dir("${env.WORKSPACE}/terraform/"){
-                    sh 'terraform init   -reconfigure'
-                    sh 'terraform apply  -var-file dev.tfvars -auto-approve'
+                    sh '''
+                    terraform init   -reconfigure
+                    terraform apply  -var-file dev.tfvars -auto-approve
+                    bastion_ip=`terraform output -json bastion-ip | tr -d '"'`
+                    private_ip=`terraform output -json private-ip | tr -d '"'`
+                    '''
                 }
                 
                 }
@@ -19,7 +23,7 @@ pipeline {
         stage('Ansible') {
             steps {
                 dir("${env.WORKSPACE}/scripts/"){
-                    sh './jumphost.sh'
+                    sh '. ./jumphost.sh'
                 }
                 dir("${env.WORKSPACE}/ansible-slave/"){
                     sh 'ansible-playbook -i inventory --private-key terraform/key-pair.pem slave-playbook.yaml'  
