@@ -16,8 +16,12 @@ pipeline {
         
         stage('Ansible') {
             steps {
-                sh 'source ./scripts/jumphost.sh'
-                sh 'ansible-playbook -i ansible-slave/inventory --private-key key-pair.pem ansible-slave/slave-playbook.yaml'
+                dir("scripts"){
+                    sh 'source ./jumphost.sh'
+                }
+                dir("ansible-slave"){
+                    sh 'ansible-playbook -i inventory --private-key key-pair.pem slave-playbook.yaml'
+                }
             }
         }
     }
