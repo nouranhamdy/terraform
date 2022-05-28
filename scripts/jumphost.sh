@@ -15,12 +15,12 @@ Host *
     ServerAliveCountMax 30
 
 host bastion
-   HostName ${env.bastion_ip}
+   HostName ${bastion_ip}
    User ubuntu
    identityFile ~/.ssh/mykey.pem
 
 host private_instance
-   HostName  ${env.private_ip}
+   HostName  ${private_ip}
    user  ubuntu
    ProxyCommand ssh bastion -W %h:%p
    identityFile ~/.ssh/mykey.pem
