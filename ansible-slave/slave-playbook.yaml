@@ -2,6 +2,26 @@
   remote_user: ubuntu
   become: yes
   tasks:
+    - name: add sudo group
+      group: 
+        name: sudo
+        state: present
+    
+    - name: Allow 'sudo' group to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^%sudo'
+        line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
+
+    - name: Add sudoers users to sudo group
+      user:
+        name: ubuntu
+        groups: sudo
+        append: yes
+        state: present
+
     - name: update apt
       apt:
         update_cache: yes
