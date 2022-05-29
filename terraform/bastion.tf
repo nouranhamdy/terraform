@@ -11,6 +11,10 @@ resource "aws_instance" "bastion" {
     device_index         = 0
   }
 
+  tags = {
+    Name = "bastion"
+  }
+
 }
 
 resource "aws_network_interface" "nic" {

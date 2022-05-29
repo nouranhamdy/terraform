@@ -8,6 +8,10 @@ resource "aws_instance" "ec2" {
     device_index         = 0
   }
 
+  tags = {
+    Name = "private-instance"
+  }
+
 }
 
 resource "aws_network_interface" "nic-ec2" {
