@@ -11,6 +11,3 @@ resource "aws_route" "private_route" {
   nat_gateway_id         = aws_nat_gateway.nat-gw.id
 }
 
-resource "aws_egress_only_internet_gateway" "egress" {
-  vpc_id = aws_vpc.vpc-01.id
-}
