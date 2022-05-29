@@ -20,7 +20,7 @@ resource "aws_eip" "nateIP-02" {
    vpc   = true
  }
 
-resource "aws_nat_gateway" "nat-gw" {
+resource "aws_nat_gateway" "nat-gw-02" {
   allocation_id = aws_eip.nateIP-02.id
   subnet_id     = aws_subnet.pub-subnet-02.id
 
