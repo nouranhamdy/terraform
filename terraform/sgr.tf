@@ -26,7 +26,7 @@ resource "aws_security_group" "sgr-ssh" {
 }
 
 
-resource "aws_security_group" "sgr-ssh-8000" {
+resource "aws_security_group" "sgr-ssh-3000" {
   name        = "allow_ssh"
   description = "Allow ssh inbound traffic"
   vpc_id      = module.network.vpc-id
@@ -39,6 +39,14 @@ resource "aws_security_group" "sgr-ssh-8000" {
     cidr_blocks      = [module.network.vpc-cidr-block]
   }
 
+  ingress {
+    description      = "open port 3000"
+    from_port        = 3000
+    to_port          = 3000
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port        = 0
     to_port          = 0
@@ -47,7 +55,7 @@ resource "aws_security_group" "sgr-ssh-8000" {
   }
 
   tags = {
-    Name = "sgr-ssh-8000"
+    Name = "sgr-ssh-3000"
   }
 }
 
