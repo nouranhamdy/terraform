@@ -26,7 +26,7 @@ resource "aws_security_group" "sgr-ssh" {
 }
 
 
-resource "aws_security_group" "sgr-ssh-3000" {
+resource "aws_security_group" "sgr-ssh-8000" {
   name        = "allow_ssh"
   description = "Allow ssh inbound traffic"
   vpc_id      = module.network.vpc-id

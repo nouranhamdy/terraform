@@ -17,7 +17,7 @@ resource "aws_instance" "ec2" {
 resource "aws_network_interface" "nic-ec2" {
   subnet_id       = module.network.private-subnet-01-id
   private_ips     = ["10.0.1.20"]
-  security_groups = [aws_security_group.sgr-ssh-3000.id]
+  security_groups = [aws_security_group.sgr-ssh-8000.id]
 
 }
 
