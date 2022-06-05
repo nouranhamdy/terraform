@@ -9,12 +9,12 @@ pipeline {
     stages {
         stage('terraform'){
             steps{
-                git 'https://github.com/nouranhamdy/terraform.git'
                 withCredentials([
                 string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'),
                 string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')
                 ]){
                 node ('master'){
+                        git 'https://github.com/nouranhamdy/terraform.git'
                         sh 'terraform -chdir=terraform/ init -reconfigure'
                         sh 'terraform -chdir=terraform/ apply -var-file dev.tfvars -auto-approve'
                     dir("${env.WORKSPACE}/terraform/"){
