@@ -34,7 +34,7 @@ pipeline {
             steps {
                 node ('master'){
                     dir("${env.WORKSPACE}/ansible-slave/"){
-                        sh 'ansible-playbook -i inventory --private-key terraform/key-pair.pem slave-playbook.yaml'  
+                        sh 'ansible-playbook -i inventory  slave-playbook.yaml'  
                     }
                 }
                 

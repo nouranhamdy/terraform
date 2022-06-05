@@ -1,7 +1,7 @@
 resource "aws_instance" "bastion" {
   ami           = var.ami # us-west-2
   instance_type = "t2.micro"
-  key_name = "key-pair"
+  key_name = aws_key_pair.public_key.key_name
   provisioner "local-exec" {
     command = "echo ${self.public_ip}"
   } 

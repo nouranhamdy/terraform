@@ -33,7 +33,7 @@ host private_instance
    StrictHostKeyChecking=no
 EOF
 
-scp ~/.ssh/id_rsa.pub private_instance:~/.ssh/authorized_keys
+# scp ~/.ssh/id_rsa.pub private_instance:~/.ssh/authorized_keys
 
 # cat << EOF > ansible-slave/inventory
 # [slaves]
