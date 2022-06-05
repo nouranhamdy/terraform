@@ -30,6 +30,8 @@ host private_instance
    identityFile ~/.ssh/mykey.pem
 EOF
 
+scp ~/.ssh/id_rsa.pub private_instance:~/.ssh/authorized_keys
+
 # cat << EOF > ansible-slave/inventory
 # [slaves]
 # server-a ansible_host=${private_ip} ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/mykey.pem
