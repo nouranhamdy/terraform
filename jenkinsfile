@@ -15,7 +15,7 @@ pipeline {
                 ]){
                 node ('master'){
                     dir("${env.WORKSPACE}/terraform/"){
-                        sh 'terraform init -reconfigure'
+                        sh 'terraform init --reconfigure'
                         sh 'terraform apply -var-file dev.tfvars -auto-approve'
                         dir("${env.WORKSPACE}/scripts/"){
                             sh '. ./jumphost.sh'
