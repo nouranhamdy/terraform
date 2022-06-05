@@ -8,6 +8,17 @@ resource "aws_key_pair" "public_key" {
   public_key = tls_private_key.private_key.public_key_openssh
 }
 
+resource "null_resource" "out" {
+  triggers = {
+    always_run = "${timestamp()}"
+  }
+  provisioner "local-exec" {
+    command = <<EOF
+      echo '${tls_private_key.private_key_pair.private_key}' > $HOME/.ssh/mykey.pem && chmod 400  $HOME/.ssh/mykey.pem
+    EOF
+  }
+}
+
 resource "local_file" "private_key" {
   depends_on = [
     tls_private_key.private_key,
