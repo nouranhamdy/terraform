@@ -14,9 +14,10 @@ pipeline {
                 string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')
                 ]){
                 node ('master'){
+                        sh 'terraform -chdir=terraform/ init -reconfigure'
+                        sh 'terraform -chdir=terraform/ apply -var-file dev.tfvars -auto-approve'
                     dir("${env.WORKSPACE}/terraform/"){
-                        sh 'terraform init -reconfigure'
-                        sh 'terraform apply -var-file dev.tfvars -auto-approve'
+                        
                         dir("${env.WORKSPACE}/scripts/"){
                             sh '. ./jumphost.sh'
                         }
