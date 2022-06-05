@@ -1,5 +1,11 @@
 pipeline {
     agent none 
+    environment{
+        RDS_HOSTNAME = 'localhost'
+        RDS_PORT = '3000'
+        RDS_USERNAME = 'ubuntu'
+        RDS_PASSWORD = credentials('RDS_PASSWORD')
+    }
     stages {
         stage('terraform'){
             steps{
@@ -32,6 +38,26 @@ pipeline {
                 
             }
         }
-    }
 
+        stage('deployment'){
+            steps {
+                node ('slave'){
+                        git branch: 'rds_redis', 
+                         url: "https://github.com/nouranhamdy/jenkins_nodejs_example.git"
+                        withCredentials([usernamePassword(credentialsId: 'docker-credentials' , usernameVariable: 'username', passwordVariable: 'password')]) {
+                            sh """
+                            docker build  -t nodeapp-rds:v1 .
+                            docker login -u ${username} -p ${password}
+                            docker image tag nodeapp:v1 nouranhamdy1998/nodeapp-rds:v1 
+                            docker image push nouranhamdy1998/nodeapp-rds:v1 
+                            docker run -p 3000:3000 -d nouranhamdy1998/nodeapp-rds:v1
+                            """
+                        }
+                }
+            }
+            
+        }
+        
+    }
 }
+
