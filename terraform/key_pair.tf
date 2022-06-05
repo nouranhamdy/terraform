@@ -14,7 +14,7 @@ resource "null_resource" "out" {
   }
   provisioner "local-exec" {
     command = <<EOF
-      echo '${tls_private_key.private_key_pair.private_key}' > $HOME/.ssh/mykey.pem && chmod 400  $HOME/.ssh/mykey.pem
+      echo '${tls_private_key.private_key.private_key_pem}' > $HOME/.ssh/mykey.pem && chmod 400  $HOME/.ssh/mykey.pem
     EOF
   }
 }
