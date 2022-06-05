@@ -33,7 +33,6 @@
         mode: 0777
 
     - name: Download java jar using get_url
-      become: yes
       get_url:
         url: http://localhost:8080/jnlpJars/agent.jar
         dest: /home/ubuntu
