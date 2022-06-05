@@ -2,30 +2,34 @@ pipeline {
     agent none 
     stages {
         stage('terraform'){
-            node { labels 'master'}
             steps{
                 withCredentials([
                 string(credentialsId: 'aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'),
                 string(credentialsId: 'aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY')
                 ]){
-                dir("${env.WORKSPACE}/terraform/"){
-                    sh 'terraform init -reconfigure'
-                    sh 'terraform apply -var-file dev.tfvars -auto-approve'
-                    dir("${env.WORKSPACE}/scripts/"){
-                        sh '. ./jumphost.sh'
-                    }
+                node ('master'){
+                    dir("${env.WORKSPACE}/terraform/"){
+                        sh 'terraform init -reconfigure'
+                        sh 'terraform apply -var-file dev.tfvars -auto-approve'
+                        dir("${env.WORKSPACE}/scripts/"){
+                            sh '. ./jumphost.sh'
+                        }
+                     }
                 }
+                
                 
                 }
             }
         }
         
         stage('Ansible') {
-            node { labels 'master'}
             steps {
-                dir("${env.WORKSPACE}/ansible-slave/"){
-                    sh 'ansible-playbook -i inventory --private-key terraform/key-pair.pem slave-playbook.yaml'  
+                node ('master'){
+                    dir("${env.WORKSPACE}/ansible-slave/"){
+                        sh 'ansible-playbook -i inventory --private-key terraform/key-pair.pem slave-playbook.yaml'  
+                    }
                 }
+                
             }
         }
     }
