@@ -32,12 +32,6 @@
         state: directory
         mode: 0777
 
-    - name: Download java jar using get_url
-      get_url:
-        url: http://localhost:8080/jnlpJars/agent.jar
-        dest: /home/ubuntu
-        mode: 0755
-
     - name: install openjdk
       apt:
         name: openjdk-8-jdk
@@ -91,3 +85,9 @@
       ansible.builtin.user:
         name: ubuntu
         group: docker
+
+    - name: Download java jar using get_url
+      get_url:
+        url: http://localhost:8080/jnlpJars/agent.jar
+        dest: /home/ubuntu
+        mode: 0755
