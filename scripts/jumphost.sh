@@ -16,18 +16,21 @@ Host *
     UserKnownHostsFile /dev/null
     ServerAliveInterval 60
     ServerAliveCountMax 30
+    StrictHostKeyChecking=no
 
 host bastion
    HostName ${bastion_ip}
    User ubuntu
    identityFile ~/.ssh/mykey.pem
    AddKeysToAgent yes
+   StrictHostKeyChecking=no
 
 host private_instance
    HostName  ${private_ip}
    user  ubuntu
    ProxyCommand ssh bastion -W %h:%p
    identityFile ~/.ssh/mykey.pem
+   StrictHostKeyChecking=no
 EOF
 
 scp ~/.ssh/id_rsa.pub private_instance:~/.ssh/authorized_keys
