@@ -86,8 +86,7 @@
         name: ubuntu
         group: docker
 
-    - name: Download java jar using get_url
-      get_url:
-        url: http://localhost:8080/jnlpJars/agent.jar
+    - name: copy jenkins agent file
+      copy:
+        src: agent.jar
         dest: /home/ubuntu
-        mode: 0755
