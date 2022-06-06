@@ -5,7 +5,7 @@ cd /var/jenkins_home/workspace/test-terraform/
 #    rm ~/.ssh/mykey.pem
 #fi
 #cat terraform/key-pair.pem > ~/.ssh/mykey.pem
-#chmod 400 ~/.ssh/mykey.pem
+#chmod 600 ~/.ssh/mykey.pem
 cd terraform/
 bastion_ip=`terraform output -json bastion-ip | tr -d '"'`
 private_ip=`terraform output -json private-ip | tr -d '"'`
