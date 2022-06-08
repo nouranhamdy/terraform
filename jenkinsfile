@@ -6,7 +6,7 @@ pipeline {
         RDS_USERNAME = 'ubuntu'
         RDS_PASSWORD = credentials('RDS_PASSWORD')
     }
-    // stages {
+     stages {
     //     stage('terraform'){
     //         steps{
     //             withCredentials([
