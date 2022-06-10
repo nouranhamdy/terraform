@@ -3,7 +3,7 @@ pipeline {
     environment{
         RDS_HOSTNAME = 'localhost'
         RDS_PORT = '3000'
-        RDS_USERNAME = 'ubuntu'
+        RDS_USERNAME = 'root'
         RDS_PASSWORD = credentials('RDS_PASSWORD')
     }
      stages {
