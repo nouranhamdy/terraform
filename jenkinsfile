@@ -49,7 +49,7 @@ pipeline {
                             sh """
                             docker build  -t nodeapp-rds:v1 .
                             docker login -u ${username} -p ${password}
-                            docker image tag nodeapp:v1 nouranhamdy1998/nodeapp-rds:v1 
+                            docker image tag nodeapp-rds:v1 nouranhamdy1998/nodeapp-rds:v1 
                             docker image push nouranhamdy1998/nodeapp-rds:v1 
                             docker run -p 3000:3000 -d nouranhamdy1998/nodeapp-rds:v1
                             """
