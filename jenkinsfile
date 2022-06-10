@@ -51,7 +51,7 @@ pipeline {
                             docker login -u ${username} -p ${password}
                             docker image tag nodeapp-rds:v1 nouranhamdy1998/nodeapp-rds:v1 
                             docker image push nouranhamdy1998/nodeapp-rds:v1 
-                            docker run -p 3000:3000 -e RDS_HOSTNAME='terraform-20220610044610697900000001.caftssfs7yoh.ap-south-1.rds.amazonaws.com' -e RDS_PORT='3000' -e RDS_USERNAME='root' -e RDS_PASSWORD=${env.RDS_PASSWORD} -e REDIS_HOSTNAME='redis.tpqptz.0001.aps1.cache.amazonaws.com' -e REDIS_PORT='6379' -d nouranhamdy1998/nodeapp-rds:v1
+                            docker run -p 3000:3000 -e RDS_HOSTNAME='terraform-20220610044610697900000001.caftssfs7yoh.ap-south-1.rds.amazonaws.com' -e RDS_PORT='3000' -e RDS_USERNAME='root' -e RDS_PASSWORD='secretgarden' -e REDIS_HOSTNAME='redis.tpqptz.0001.aps1.cache.amazonaws.com' -e REDIS_PORT='6379' -d nouranhamdy1998/nodeapp-rds:v1
                             """
                         }
                 }
